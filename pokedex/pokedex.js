@@ -1,5 +1,5 @@
-//Declaro la variable de pokemons a mostrar
-let numberOfPokemons = 151;
+//Declaro las variables a utilizar
+let numberOfPokemons = 150;
 let pokemons = [];
 
 const pokedex$$ = document.querySelector("#pokedex")
@@ -13,7 +13,6 @@ async function getPokemons() {
     }
 
     const fetchResult = await allPokemons();
-
     for (let i = 0; i < numberOfPokemons; i++) {
 
         async function onePokemon() {
@@ -37,21 +36,20 @@ function pokedex(pokemon) {
     nombre$$.className = "card-title";
     number$$.className = "card-number";
     imagen$$.className = "card-image";
-    
+
     nombre$$.textContent = pokemon.name
     imagen$$.src = pokemon.sprites.other.dream_world.front_default
-    number$$.textContent = " Nº " + pokemon.id.toString();
-    
+    number$$.textContent = " # " + pokemon.id.toString();
+
     pokedex$$.appendChild(carta$$)
     carta$$.appendChild(nombre$$)
     carta$$.appendChild(imagen$$)
-    carta$$.appendChild(number$$) 
-    
+    carta$$.appendChild(number$$)   
 };
 
 //Creo el buscador de pokemons
 const search$$ = document.querySelector('.search-input');
-const search = () => {;
+const search = () => {
   
     const pokemonsFiltered = pokemons.filter((pokemon) => {
     return pokemon.name.toLowerCase().includes(search$$.value.toLowerCase());
@@ -65,19 +63,22 @@ const search = () => {;
 search$$.addEventListener("input", search);
 
 
-
-//Creo funcion de filtrado por tipos
+/*Creo funcion de filtrado por tipos
 const filtrar = (type) => {
-    const pokemonsFiltered = pokemons.filter((pokemon)=>{
-       return pokemon.type
+    const pokemonsTypes = pokemones.filter((pokemon) => {
+      let encontrado = false;
+      for (const tipo of pokemon.types) {
+        if (tipo.type.name === type) {
+          encontrado = true;
+        }
+      }
+      if (encontrado) {
+        return pokemon;
+      }
+      // return pokemon.types[0].type.name === type;
     });
-
-    pokedex$$.innerHTML = ""
-    for (const types of type) {
-        pokemons.types.type
-    }
-
-};
+    
+filter$$.addEventListener("click", filtrar);
 
 
 /*Creo la carta de atrás para girarla y mostrar elemento
